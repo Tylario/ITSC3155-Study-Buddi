@@ -7,3 +7,4 @@ Feature List From User Scenarios:
 - Email notifications when people match
 - Class and section selection
 - Possible messaging/groupchat feature
+- Selecting what the goal of your meeting is
