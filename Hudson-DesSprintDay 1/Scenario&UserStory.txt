@@ -1,0 +1,10 @@
+Persona:
+Flyler is a new transfer student at UNCC, coming from a community college with a solid background in computer science. Extroverted and used to having a lively social circle, Flyler finds himself starting from scratch at UNCC, with no familiar faces around. He's looking forward to making friends and finding study partners in his new environment but notices that not everyone is as open to socializing. 
+
+Scenario:
+Seeing that many of his classmates in computer science seem to keep to themselves, Flyler wants to change that. One day, after class, a friend mentions StudyBuddi, and he also spots a poster about it on the campus bulletin board. Intrigued by the idea of connecting with others who might need a little push to socialize, he decides to give it a try. Flyler sets up his profile, emphasizing his interest in group studies and making new friends, hoping to find others who share his enthusiasm for both the social and academic sides of university life.
+
+User Stories:
+As a new student, I want to find study groups for my computer science courses so I can get to know my classmates better.
+As someone who enjoys socializing, I want to meet other students who are looking for friends, so we can support each other both academically and socially.
+As a transfer student, I want to easily integrate into the campus community by connecting with peers through study sessions and group activities.
