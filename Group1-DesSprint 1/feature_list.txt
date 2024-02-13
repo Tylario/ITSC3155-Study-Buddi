@@ -1,0 +1,9 @@
+Feature List From User Scenarios:
+- Editing and creating profile
+- Meeting page - students can see other student profiles
+- Writing study needs/study styles and the amount of people wanted in a group
+- Ability to enter times where users are free to study
+- Tags for hobbies and interests
+- Email notifications when people match
+- Class and section selection
+- Possible messaging/groupchat feature
