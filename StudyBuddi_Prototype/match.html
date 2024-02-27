@@ -1,0 +1,172 @@
+<html>
+<head>
+<title>(low fidelity) Study Buddy - Matching</title>
+<style>
+   .header {
+         position: fixed;
+         top: 0;
+         width: 100%;
+         background-color: #f1f1f1;
+         text-align: center;
+         padding: 5px;
+    }
+
+    .header button {
+        color: black;
+        padding: 7px 10px;
+        margin: 8px 0;
+        border: 1px solid black;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 120px;
+    }
+
+    .header button:hover {
+        background-color: #ddd;
+    }
+
+    .header button:active {
+        background-color: #000;
+        color: white;
+    }
+
+    .main_content {
+        position: absolute;
+        top: 75px;
+        left: 50%;
+        width: 700px;
+        margin-left: -350px;
+        border: 1px solid grey;
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .selections {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+    }
+
+    .filter-options {
+        margin-left: 20px;
+    }
+
+    .group_container {
+        width: 100%;
+        left: 5%;
+        margin-top: 20px;
+        border: 1px solid grey;
+        border-radius: 8px;
+        
+    }
+
+</style>
+</head>
+<body>
+    <div class="header">
+        <button onclick="location.href='match.html'">Refresh</button>
+        <button onclick="location.href='index.html'">Home</button>
+        <button onclick="location.href='login.html'">Profile</button>
+    </div>
+    <div class="main_content">
+        <div class="selections">
+            <div>
+                Group size: 
+                <select id="groupSize">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
+            <div class="filter-options">
+                Filter by:
+                <br>
+                    <label><input type="checkbox" name="filter" value="sameClass">Same class</label>
+                    <label><input type="checkbox" name="filter" value="sameStudyType">Same study type</label>
+                    <label><input type="checkbox" name="filter" value="sameTime">Same preferred time</label>
+                    <!-- Add more options as needed -->
+            </div>
+        </div>
+        <div id="groups">
+            <!-- Groups will be dynamically inserted here -->
+        </div>
+    </div>
+</body>
+<script>
+    const people = [
+        { name: 'Tyler Hudson', email: 'tyler@example.com', bio: 'Software Engineer', img: '' },
+        { name: 'Ryan Hoover', email: 'ryan@example.com', bio: 'Surfing enthusiast', img: '' },
+        { name: 'Eva Gunn', email: 'eva@example.com', bio: 'Nature lover', img: '' },
+        { name: 'Shiksha Kabra', email: 'shiksha@example.com', bio: 'Volunteer worker', img: '' },
+        { name: 'Khushi Patel', email: 'khushi@example.com', bio: 'Book lover', img: '' },
+        { name: 'Mathew Shimko', email: 'mathew@example.com', bio: 'Passionate about cars', img: '' },
+        { name: 'Tyler Rebman', email: 'tyler@example.com', bio: 'Sports fanatic', img: '' },
+        { name: 'Brandon Aguilar', email: 'brandon@example.com', bio: 'Enjoys outdoor activities', img: '' },
+        { name: 'Isaac Amanor', email: 'isaac@example.com', bio: 'Passionate about technology', img: '' },
+        { name: 'Ajmal Amir', email: 'ajmal@example.com', bio: 'Loves to travel', img: '' },
+        { name: 'Hanin Ammar', email: 'hanin@example.com', bio: 'Art enthusiast', img: '' },
+        { name: 'Zachary Atkins', email: 'zachary@example.com', bio: 'Sports lover', img: '' },
+        { name: 'Abhay Azariah', email: 'abhay@example.com', bio: 'Music aficionado', img: '' },
+        { name: 'Emmanuel Balogun', email: 'emmanuel@example.com', bio: 'Aspiring chef', img: '' },
+        { name: 'Bryan Banda Cortes', email: 'bryan@example.com', bio: 'Film buff', img: '' },
+        { name: 'Brody Banner', email: 'brody@example.com', bio: 'Fitness enthusiast', img: '' },
+        { name: 'Shiven Bhardwaj', email: 'shiven@example.com', bio: 'Bookworm', img: '' },
+        { name: 'Ryan Breedlove', email: 'ryan@example.com', bio: 'Tech geek', img: '' },
+        { name: 'Xaiver Brittain', email: 'xaiver@example.com', bio: 'Passionate about animals', img: '' },
+        { name: 'Emma Broggi', email: 'emma@example.com', bio: 'Environmental activist', img: '' },
+        { name: 'Alec Bronz', email: 'alec@example.com', bio: 'Coffee addict', img: '' },
+        { name: 'Xander Bruce', email: 'xander@example.com', bio: 'Gamer', img: '' },
+        { name: 'Stevie Calandrino', email: 'stevie@example.com', bio: 'Musician', img: '' },
+        { name: 'Manny Campbell', email: 'manny@example.com', bio: 'Comic book fan', img: '' },
+        { name: 'Vachanshree Mugappa Chabbi', email: 'vachanshree@example.com', bio: 'Yoga practitioner', img: '' },
+        { name: 'Brian Cruz', email: 'brian@example.com', bio: 'Foodie', img: '' },
+        { name: 'David Cruz', email: 'david@example.com', bio: 'History buff', img: '' },
+        { name: 'Rahil Desai', email: 'rahil@example.com', bio: 'Movie lover', img: '' },
+        { name: 'Emir Dostovic', email: 'emir@example.com', bio: 'Hiking enthusiast', img: '' },
+        { name: 'Sharvary Dumbre', email: 'sharvary@example.com', bio: 'Passionate about fashion', img: '' },
+        { name: 'DeCristo Franceschini', email: 'decristo@example.com', bio: 'Fitness coach', img: '' },
+        { name: 'Gage Gasparyan', email: 'gage@example.com', bio: 'Artificial intelligence researcher', img: '' },
+        { name: 'Jordan Grandison', email: 'jordan@example.com', bio: 'Music producer', img: '' },
+        { name: 'Nathan Gray', email: 'nathan@example.com', bio: 'Cycling enthusiast', img: '' },
+
+    ];
+
+
+    function init() {
+        const groupSize = parseInt(document.getElementById('groupSize').value, 10);
+        const groupsContainer = document.getElementById('groups');
+        groupsContainer.innerHTML = ''; // Clear previous groups
+        let groupHTML = '';
+
+        for (let i = 0; i < people.length; i += groupSize) {
+            const groupMembers = people.slice(i, i + groupSize);
+            let membersHTML = groupMembers.map(member => `
+                <div class="member_container">
+                    <p>Name: ${member.name}</p>
+                    <p>Email: ${member.email}</p>
+                    <p>Bio: ${member.bio}</p>
+                    <img src="${member.img}" alt="Profile image" />
+                </div>
+            `).join('');
+
+            let emails = groupMembers.map(member => member.email).join(',');
+            membersHTML += `<button onclick="window.location.href='mailto:${emails}'">Contact Group</button>`;
+
+            groupHTML += `<div class="group_container">${membersHTML}</div>`;
+        }
+
+        groupsContainer.innerHTML = groupHTML;
+    }
+
+    // Call init on document load or when group size changes
+    document.addEventListener('DOMContentLoaded', init);
+    document.getElementById('groupSize').addEventListener('change', init);
+</script>
+</html>
