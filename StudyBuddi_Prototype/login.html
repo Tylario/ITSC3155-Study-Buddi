@@ -7,27 +7,104 @@
         <!-- Bootstrap CSS find way to change color/organiation-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-        <!--nav bar-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="index.html">Home</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-              <div class="navbar-nav">
-                <a class="nav-item nav-link" href="profile.html">Profile</a>
-                <a class="nav-item nav-link" href="match.html">Match</a>
-                <a class="nav-item nav-link" href="rename_.html">Another One</a>
-                <a class="nav-item nav-link" href="login.html">Sign-Up/Log-In</a>
-              </div>
-            </div>
-        </nav>
-        <!---->
+        <style>
+          .header {
+                top: 0;
+                width: 100%;
+                background-color: #f1f1f1;
+                text-align: center;
+                padding: 5px;
+           }
+           .header button {
+               color: black;
+               padding: 7px 10px;
+               margin: 8px 0;
+               border: 1px solid black;
+               border-radius: 4px;
+               cursor: pointer;
+               width: 120px;
+           }
+           .header button:hover {
+               background-color: #ddd;
+           }
+           .header button:active {
+               background-color: #000;
+               color: white;
+           }
+           .main_content {
+               position: absolute;
+               top: 75px;
+               left: 50%;
+               width: 700px;
+               margin-left: -350px;
+               border: 1px solid grey;
+               border-radius: 8px;
+               padding: 20px;
+               text-align: center;
+           }
+           .selections {
+               display: flex;
+               justify-content: space-around;
+               align-items: flex-start;
+           }
+           .filter-options {
+               margin-left: 20px;
+           }
+           .group_container {
+               width: 100%;
+               left: 5%;
+               margin-top: 20px;
+               border: 1px solid grey;
+               border-radius: 8px;
+               
+           }
+           .text {
+             position: relative;
+             top: 40%;
+             left: 50%;
+             right: 50%;
+             bottom: 50%;
+             align-content: center;
+             text-align: center;
+             font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+             font-size: 100%;
+             transform: translate(-50%, -50%);
+             color:#ffffff;
+           }
+           .head{
+             text-align: center;
+             color: #ffffff;
+             padding-top: 10px;
+             font-size: 200%;
+             font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+           }
+           body{
+            background-color: #56018bb0;
+            
+           }
+        </style>
 
     </head>
     <body>
+        <!--Nav Bar-->
+      <header>
+        <div class="header">
+            <button onclick="location.href='index.html'">Home</button>
+        </div>
+      </header>
 
-        hi
+      <div class = "text">
+        <p class="head">Log In or Sign Up: </p>
+        <form action="D:\ITSC-Programs-Khushi\Software-Programs-Patel\ITSC3155-Study-Buddi\StudyBuddi_Prototype\profile.html" method="post">
+            <label for="Username">Username:</label>
+            <input type="text" id="Username" name="Username"><br>
 
+            <label for="password">Password:</label>
+            <input type="text" id="password" name="password"><br>
+
+            <button type="submit" class="type">Submit</button>
+        </form>
+        
+    </div>
     </body>
 </html>
