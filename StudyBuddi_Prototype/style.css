@@ -1,0 +1,157 @@
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #f1f1f1;
+  text-align: center;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.header button {
+  color: black;
+  padding: 7px 10px;
+  margin: 8px 0;
+  border: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 120px;
+}
+
+.header button:hover {
+  background-color: #ddd;
+}
+
+.header button:active {
+  background-color: #000;
+  color: white;
+}
+
+.main_content {
+  border: 1px solid grey;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  margin: 7%;
+  background-color: white;
+}
+
+.selections {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.filter-options {
+  margin-left: 20px;
+}
+
+.group_container {
+  width: 100%;
+  left: 5%;
+  margin-top: 20px;
+  border: 1px solid grey;
+  border-radius: 8px;
+  margin-bottom: 1.2rem;
+  background-color: rgb(243, 234, 243);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 1rem;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.member_container {
+  border: 1px solid grey;
+  margin: 1rem 1rem 1rem 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: white;
+}
+#groups {
+  align-content: center;
+  width: 100%;
+}
+.tags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.tags_tags {
+  border: 0.1rem solid black;
+  border-radius: 1rem;
+  padding: 0 0.5rem;
+  margin: 0.5rem 0.2rem;
+}
+button {
+  width: 10rem;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: var(--primary-color);
+  border-radius: 1rem;
+  margin: auto;
+  text-align: center;
+  margin-bottom: 1em;
+}
+.profile_img {
+  width: 17rem;
+  height: auto;
+}
+.company_name {
+  margin-right: 50%;
+}
+.header {
+  top: 0;
+  width: 100%;
+  background-color: #f1f1f1;
+  text-align: center;
+  padding: 5px;
+}
+.header button {
+  color: black;
+  padding: 7px 10px;
+  margin: 8px 0;
+  border: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 120px;
+}
+.header button:hover {
+  background-color: #ddd;
+}
+.header button:active {
+  background-color: #000;
+  color: white;
+}
+
+.selections {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+.filter-options {
+  margin-left: 20px;
+}
+.group_container {
+  width: 100%;
+  left: 5%;
+  margin-top: 20px;
+  border: 1px solid grey;
+  border-radius: 8px;
+}
+
+.head {
+  text-align: center;
+  padding-top: 10px;
+  font-size: 200%;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  color: #000;
+}
+body {
+  background-color: #d4c4deb0;
+}
+main {
+  margin-top: 5rem;
+}
