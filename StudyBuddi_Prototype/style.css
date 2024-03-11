@@ -96,8 +96,11 @@ button {
   margin-bottom: 1em;
 }
 .profile_img {
-  width: 17rem;
+  max-width: 17rem;
   height: auto;
+}
+.bio-p {
+  max-width: 16rem;
 }
 .company_name {
   margin-right: 50%;
@@ -160,4 +163,3 @@ main {
   flex-direction: row;
   justify-content: space-evenly;
 }
-
