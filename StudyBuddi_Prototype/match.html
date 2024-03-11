@@ -1,178 +1,354 @@
 <html>
-<head>
-<title>(low fidelity) Study Buddy - Matching</title>
-<!--needed meta characteristics-->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!-- Bootstrap CSS find way to change color/organiation-->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <head>
+    <title>(low fidelity) Study Buddy - Matching</title>
+    <!--needed meta characteristics-->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Bootstrap CSS find way to change color/organiation-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./style.css">
 
-<style>
-   .header {
-         position: fixed;
-         top: 0;
-         width: 100%;
-         background-color: #f1f1f1;
-         text-align: center;
-         padding: 5px;
-    }
 
-    .header button {
-        color: black;
-        padding: 7px 10px;
-        margin: 8px 0;
-        border: 1px solid black;
-        border-radius: 4px;
-        cursor: pointer;
-        width: 120px;
-    }
+    <style>
 
-    .header button:hover {
-        background-color: #ddd;
-    }
-
-    .header button:active {
-        background-color: #000;
-        color: white;
-    }
-
-    .main_content {
-        position: absolute;
-        top: 75px;
-        left: 50%;
-        width: 700px;
-        margin-left: -350px;
-        border: 1px solid grey;
-        border-radius: 8px;
-        padding: 20px;
-        text-align: center;
-    }
-
-    .selections {
-        display: flex;
-        justify-content: space-around;
-        align-items: flex-start;
-    }
-
-    .filter-options {
-        margin-left: 20px;
-    }
-
-    .group_container {
-        width: 100%;
-        left: 5%;
-        margin-top: 20px;
-        border: 1px solid grey;
-        border-radius: 8px;
-        
-    }
-
-</style>
-</head>
-<body>
+    </style>
+  </head>
+  <body>
     <div class="header">
-        <button onclick="location.href='match.html'">Refresh</button>
-        <button onclick="location.href='index.html'">Home</button>
-        <button onclick="location.href='login.html'">Profile</button>
+      <h1 class="company_name">StudyBuddi</h1>
+      <button onclick="location.href='index.html'">Home</button>
+      <button onclick="location.href='login.html'">Profile</button>
+      <button onclick="location.href='match.html'">Refresh</button>
     </div>
     <div class="main_content">
-        <div class="selections">
-            <div>
-                Group size: 
-                <select id="groupSize">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <!-- Add more options as needed -->
-                </select>
-            </div>
-            <div class="filter-options">
-                Filter by:
-                <br>
-                    <label><input type="checkbox" name="filter" value="sameClass">Same class</label>
-                    <label><input type="checkbox" name="filter" value="sameStudyType">Same study type</label>
-                    <label><input type="checkbox" name="filter" value="sameTime">Same preferred time</label>
-                    <!-- Add more options as needed -->
-            </div>
+      <div class="selections">
+        <div>
+          Group size:
+          <select id="groupSize">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <!-- Add more options as needed -->
+          </select>
         </div>
-        <div id="groups">
-            <!-- Groups will be dynamically inserted here -->
+        <div class="filter-options">
+          Filter by:
+          <br />
+          <label
+            ><input type="checkbox" name="filter" value="sameClass" />Same
+            class</label
+          >
+          <label
+            ><input type="checkbox" name="filter" value="sameStudyType" />Same
+            study type</label
+          >
+          <label
+            ><input type="checkbox" name="filter" value="sameTime" />Same
+            preferred time</label
+          >
+          <!-- Add more options as needed -->
         </div>
+      </div>
+      <div id="groups">
+        <!-- Groups will be dynamically inserted here -->
+      </div>
     </div>
-</body>
-<script>
+  </body>
+  <script>
     const people = [
-        { name: 'Tyler Hudson', email: 'tyler@example.com', bio: 'Software Engineer', img: '' },
-        { name: 'Ryan Hoover', email: 'ryan@example.com', bio: 'Surfing enthusiast', img: '' },
-        { name: 'Eva Gunn', email: 'eva@example.com', bio: 'Nature lover', img: '' },
-        { name: 'Shiksha Kabra', email: 'shiksha@example.com', bio: 'Volunteer worker', img: '' },
-        { name: 'Khushi Patel', email: 'khushi@example.com', bio: 'Book lover', img: '' },
-        { name: 'Mathew Shimko', email: 'mathew@example.com', bio: 'Passionate about cars', img: '' },
-        { name: 'Tyler Rebman', email: 'tyler@example.com', bio: 'Sports fanatic', img: '' },
-        { name: 'Brandon Aguilar', email: 'brandon@example.com', bio: 'Enjoys outdoor activities', img: '' },
-        { name: 'Isaac Amanor', email: 'isaac@example.com', bio: 'Passionate about technology', img: '' },
-        { name: 'Ajmal Amir', email: 'ajmal@example.com', bio: 'Loves to travel', img: '' },
-        { name: 'Hanin Ammar', email: 'hanin@example.com', bio: 'Art enthusiast', img: '' },
-        { name: 'Zachary Atkins', email: 'zachary@example.com', bio: 'Sports lover', img: '' },
-        { name: 'Abhay Azariah', email: 'abhay@example.com', bio: 'Music aficionado', img: '' },
-        { name: 'Emmanuel Balogun', email: 'emmanuel@example.com', bio: 'Aspiring chef', img: '' },
-        { name: 'Bryan Banda Cortes', email: 'bryan@example.com', bio: 'Film buff', img: '' },
-        { name: 'Brody Banner', email: 'brody@example.com', bio: 'Fitness enthusiast', img: '' },
-        { name: 'Shiven Bhardwaj', email: 'shiven@example.com', bio: 'Bookworm', img: '' },
-        { name: 'Ryan Breedlove', email: 'ryan@example.com', bio: 'Tech geek', img: '' },
-        { name: 'Xaiver Brittain', email: 'xaiver@example.com', bio: 'Passionate about animals', img: '' },
-        { name: 'Emma Broggi', email: 'emma@example.com', bio: 'Environmental activist', img: '' },
-        { name: 'Alec Bronz', email: 'alec@example.com', bio: 'Coffee addict', img: '' },
-        { name: 'Xander Bruce', email: 'xander@example.com', bio: 'Gamer', img: '' },
-        { name: 'Stevie Calandrino', email: 'stevie@example.com', bio: 'Musician', img: '' },
-        { name: 'Manny Campbell', email: 'manny@example.com', bio: 'Comic book fan', img: '' },
-        { name: 'Vachanshree Mugappa Chabbi', email: 'vachanshree@example.com', bio: 'Yoga practitioner', img: '' },
-        { name: 'Brian Cruz', email: 'brian@example.com', bio: 'Foodie', img: '' },
-        { name: 'David Cruz', email: 'david@example.com', bio: 'History buff', img: '' },
-        { name: 'Rahil Desai', email: 'rahil@example.com', bio: 'Movie lover', img: '' },
-        { name: 'Emir Dostovic', email: 'emir@example.com', bio: 'Hiking enthusiast', img: '' },
-        { name: 'Sharvary Dumbre', email: 'sharvary@example.com', bio: 'Passionate about fashion', img: '' },
-        { name: 'DeCristo Franceschini', email: 'decristo@example.com', bio: 'Fitness coach', img: '' },
-        { name: 'Gage Gasparyan', email: 'gage@example.com', bio: 'Artificial intelligence researcher', img: '' },
-        { name: 'Jordan Grandison', email: 'jordan@example.com', bio: 'Music producer', img: '' },
-        { name: 'Nathan Gray', email: 'nathan@example.com', bio: 'Cycling enthusiast', img: '' },
-
+      {
+        name: "Tyler Hudson",
+        email: "tyler@example.com",
+        tags: ["Software Engineer"],
+        img: "https://wwd.com/wp-content/uploads/2023/06/MEGA989664_002.jpg?crop=0px%2C404px%2C3600px%2C2015px&resize=1000%2C563",
+        biography: "this is my bio",
+      },
+      {
+        name: "Ryan Hoover",
+        email: "ryan@example.com",
+        tags: ["Surfing enthusiast"],
+        img: "https://www.watchmojo.com/uploads/blipthumbs/Fi-T-Top10-Hilarious-Cartoon-Characters-720p30-1_480.jpg",
+        biography: "this is my bio",
+      },
+      {
+        name: "Eva Gunn",
+        email: "eva@example.com",
+        tags: ["nature lover", "supernaturally gifted"],
+        img: "https://imgix.ranker.com/list_img_v2/2095/362095/original/the-most-annoying-cartoon-characters-of-all-time-u1?fit=crop&fm=pjpg&q=80&dpr=2&w=1200&h=720",
+        biography: "this is my bio",
+      },
+      {
+        name: "Shiksha Kabra",
+        email: "shiksha@example.com",
+        tags: ["Volunteer worker"],
+        img: "https://i.pinimg.com/originals/c3/bd/27/c3bd278b8ec64126e0033e1437716616.png",
+        biography: "this is my bio",
+      },
+      {
+        name: "Khushi Patel",
+        email: "khushi@example.com",
+        tags: ["Book lover"],
+        img: "https://assets.nickjr.com/uri/mgid:arc:imageassetref:shared.nickjr.us:750e2641-ff02-411c-8db5-8d0f84b71ffb?quality=0.7&gen=ntrn&legacyStatusCode=true",
+        biography: "this is my bio",
+      },
+      {
+        name: "Mathew Shimko",
+        email: "mathew@example.com",
+        tags: ["Passionate about cars"],
+        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs9hr6a0HT9rOggEvENRp9gwxZC7YWKWH2aQ&usqp=CAU",
+        biography: "this is my bio",
+      },
+      {
+        name: "Tyler Rebman",
+        email: "tyler@example.com",
+        tags: ["Sports fanatic"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Brandon Aguilar",
+        email: "brandon@example.com",
+        tags: ["Enjoys outdoor activities"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Isaac Amanor",
+        email: "isaac@example.com",
+        tags: ["Passionate about technology"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Ajmal Amir",
+        email: "ajmal@example.com",
+        tags: ["Loves to travel"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Hanin Ammar",
+        email: "hanin@example.com",
+        tags: ["Art enthusiast"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Zachary Atkins",
+        email: "zachary@example.com",
+        tags: ["Sports lover"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Abhay Azariah",
+        email: "abhay@example.com",
+        tags: ["Music aficionado"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Emmanuel Balogun",
+        email: "emmanuel@example.com",
+        tags: ["Aspiring chef"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Bryan Banda Cortes",
+        email: "bryan@example.com",
+        tags: ["Film buff"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Brody Banner",
+        email: "brody@example.com",
+        tags: ["Fitness enthusiast"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Shiven Bhardwaj",
+        email: "shiven@example.com",
+        tags: ["Bookworm"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Ryan Breedlove",
+        email: "ryan@example.com",
+        tags: ["Tech geek"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Xaiver Brittain",
+        email: "xaiver@example.com",
+        tags: ["Passionate about animals"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Emma Broggi",
+        email: "emma@example.com",
+        tags: ["Environmental activist"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Alec Bronz",
+        email: "alec@example.com",
+        tags: ["Coffee addict"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Xander Bruce",
+        email: "xander@example.com",
+        tags: ["Gamer"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Stevie Calandrino",
+        email: "stevie@example.com",
+        tags: ["Musician"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Manny Campbell",
+        email: "manny@example.com",
+        tags: ["Comic book fan"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Vachanshree Mugappa Chabbi",
+        email: "vachanshree@example.com",
+        tags: ["Yoga practitioner"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Brian Cruz",
+        email: "brian@example.com",
+        tags: ["Foodie"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "David Cruz",
+        email: "david@example.com",
+        tags: ["History buff"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Rahil Desai",
+        email: "rahil@example.com",
+        tags: ["Movie lover"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Emir Dostovic",
+        email: "emir@example.com",
+        tags: ["Hiking enthusiast"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Sharvary Dumbre",
+        email: "sharvary@example.com",
+        tags: ["Passionate about fashion"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "DeCristo Franceschini",
+        email: "decristo@example.com",
+        tags: ["Fitness coach"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Gage Gasparyan",
+        email: "gage@example.com",
+        tags: ["Artificial intelligence researcher"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Jordan Grandison",
+        email: "jordan@example.com",
+        tags: ["Music producer"],
+        img: "",
+        biography: "this is my bio",
+      },
+      {
+        name: "Nathan Gray",
+        email: "nathan@example.com",
+        tags: ["Cycling enthusiast"],
+        img: "",
+        biography: "this is my bio",
+      },
     ];
 
-
     function init() {
-        const groupSize = parseInt(document.getElementById('groupSize').value, 10);
-        const groupsContainer = document.getElementById('groups');
-        groupsContainer.innerHTML = ''; // Clear previous groups
-        let groupHTML = '';
+      const groupSize = parseInt(
+        document.getElementById("groupSize").value,
+        10
+      );
+      const groupsContainer = document.getElementById("groups");
+      groupsContainer.innerHTML = ""; // Clear previous groups
+      let groupHTML = "";
 
-        for (let i = 0; i < people.length; i += groupSize) {
-            const groupMembers = people.slice(i, i + groupSize);
-            let membersHTML = groupMembers.map(member => `
+      for (let i = 0; i < people.length; i += groupSize) {
+        const groupMembers = people.slice(i, i + groupSize);
+        let membersHTML = groupMembers
+          .map(
+            (member) => `
                 <div class="member_container">
-                    <p>Name: ${member.name}</p>
+                    <h2>${member.name}</h2>
+                    <img class="profile_img" src="${
+                      member.img
+                    }" alt="Profile image">
+                    <div class='tags'>${member.tags
+                      .map((element) => `<p class='tags_tags'>${element}</p>`)
+                      .join("")}
+                    </div>
+                    <p>${member.biography}</p>
                     <p>Email: ${member.email}</p>
-                    <p>Bio: ${member.bio}</p>
-                    <img src="${member.img}" alt="Profile image" />
                 </div>
-            `).join('');
+            `
+          )
+          .join("");
 
-            let emails = groupMembers.map(member => member.email).join(',');
-            membersHTML += `<button onclick="window.location.href='mailto:${emails}'">Contact Group</button>`;
+        let emails = groupMembers.map((member) => member.email).join(",");
+        groupHTML += `<div class="group_container">${membersHTML}</div>`;
+        groupHTML += `<button onclick="window.location.href='mailto:${emails}'">Contact Group</button>`;
+      }
 
-            groupHTML += `<div class="group_container">${membersHTML}</div>`;
-        }
-
-        groupsContainer.innerHTML = groupHTML;
+      groupsContainer.innerHTML = groupHTML;
     }
 
     // Call init on document load or when group size changes
-    document.addEventListener('DOMContentLoaded', init);
-    document.getElementById('groupSize').addEventListener('change', init);
-</script>
+    document.addEventListener("DOMContentLoaded", init);
+    document.getElementById("groupSize").addEventListener("change", init);
+  </script>
 </html>
