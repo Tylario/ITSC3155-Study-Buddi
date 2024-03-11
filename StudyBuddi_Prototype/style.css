@@ -155,3 +155,9 @@ body {
 main {
   margin-top: 5rem;
 }
+.flex-r {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
