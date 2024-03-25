@@ -9,10 +9,7 @@ def login():
         username = request.form.get('Username')
         password = request.form.get('password')
         
-        # Perform login validation
-        # For demonstration, assuming username and password are correct
-        # You can implement your own validation logic here
-        # For now, let's redirect to the profile page
+        # redirect to the profile page until logic to validate credentials is added
         return redirect(url_for('profile'))
     return render_template('login.html')
 
