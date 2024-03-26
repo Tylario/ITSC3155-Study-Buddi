@@ -21,6 +21,46 @@
         body{
             background-color: #a0659180;
            }
+
+        .group_container {
+              border: 2px solid #333;
+              margin: 20px 10px;
+              padding: 10px;
+              display: flex;
+              flex-direction: column; /* Organizes the group members and contact button in a column */
+              align-items: center; /* Centers the column */
+          }
+
+          .members_wrapper {
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: center; /* Ensures members are side by side and centered */
+              width: 100%;
+          }
+
+          .member_container {
+              margin: 5px;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              text-align: center;
+              width: calc(100% / 3 - 10px); /* Adjusts member width, assuming 3 members per row, adjust as necessary */
+          }
+
+          .profile_img {
+              width: 400px; /* Fixed width */
+              height: 400px; /* Fixed height */
+              object-fit: cover; /* Ensures image covers the area without stretching */
+          }
+
+          .contact_group_button {
+              width: auto;
+              padding: 10px 20px;
+              margin-top: 10px;
+          }
+
+
+
     </style>
   </head>
   <body>
@@ -28,7 +68,7 @@
       <h1 class="company_name">StudyBuddi</h1>
       <button onclick="location.href='index.html'">Home</button>
       <button onclick="location.href='profilepage.html'">Profile</button>
-      <button onclick="location.href='match.html'">Refresh</button>
+      <button onclick="initializeContent()">Refresh</button>
     </div>
     <div class="main_content">
       <div class="selections">
@@ -311,46 +351,37 @@
       },
     ];
 
-    function init() {
-      const groupSize = parseInt(
-        document.getElementById("groupSize").value,
-        10
-      );
-      const groupsContainer = document.getElementById("groups");
-      groupsContainer.innerHTML = ""; // Clear previous groups
-      let groupHTML = "";
+    function initializeContent() 
+    {
+        const groupSize = parseInt(document.getElementById("groupSize").value, 10);
+        const groupsContainer = document.getElementById("groups");
+        groupsContainer.innerHTML = ""; // Clear previous groups
 
-      for (let i = 0; i < people.length; i += groupSize) {
-        const groupMembers = people.slice(i, i + groupSize);
-        let membersHTML = groupMembers
-          .map(
-            (member) => `
-                <div class="member_container">
-                    <h2>${member.name}</h2>
-                    <img class="profile_img" src="${
-                      member.img
-                    }" alt="Profile image">
-                    <div class='tags'>${member.tags
-                      .map((element) => `<p class='tags_tags'>${element}</p>`)
-                      .join("")}
+        for (let i = 0; i < people.length; i += groupSize) {
+            const groupMembers = people.slice(i, i + groupSize);
+            let membersHTML = groupMembers
+              .map(
+                (member) => `
+                    <div class="member_container">
+                        <h2>${member.name}</h2>
+                        <img class="profile_img" src="${member.img}" alt="Profile image">
+                        <div class='tags'>${member.tags.map((element) => `<p class='tags_tags'>${element}</p>`).join("")}
+                        </div>
+                        <p class='bio-p'>${member.biography}</p>
+                        <p>Email: ${member.email}</p>
                     </div>
-                    <p class='bio-p'>${member.biography}</p>
-                    <p>Email: ${member.email}</p>
-                </div>
-            `
-          )
-          .join("");
+                `
+              )
+              .join("");
 
-        let emails = groupMembers.map((member) => member.email).join(",");
-        groupHTML += `<div class="group_container">${membersHTML}</div>`;
-        groupHTML += `<button onclick="window.location.href='mailto:${emails}'">Contact Group</button>`;
-      }
-
-      groupsContainer.innerHTML = groupHTML;
+            let emails = groupMembers.map((member) => member.email).join(",");
+            groupsContainer.innerHTML += `<div class="group_container"><div class="members_wrapper">${membersHTML}</div><button class="contact_group_button" onclick="window.location.href='mailto:${emails}'">Contact Group</button></div>`;
+        }
     }
 
-    // Call init on document load or when group size changes
-    document.addEventListener("DOMContentLoaded", init);
-    document.getElementById("groupSize").addEventListener("change", init);
+
+    document.addEventListener("DOMContentLoaded", initializeContent);
+    document.getElementById("groupSize").addEventListener("change", initializeContent);
+
   </script>
 </html>
