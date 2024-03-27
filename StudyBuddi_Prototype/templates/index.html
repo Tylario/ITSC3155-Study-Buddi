@@ -16,7 +16,7 @@
       integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./static/style.css" />
+
 
     <style>
       /*carousel stylings*/
@@ -25,28 +25,75 @@
         height: auto; /* Let the height adjust accordingly */
       }
 
-      .head {
-        text-align: center;
-        color: #140014;
-        padding-top: 100px;
-        font-size: 300%;
-        font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+      #carouselExampleInterval {
+        margin: 1rem 20rem 1rem 20rem;
       }
-
-      .para {
+            .header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: #f1f1f1;
+        text-align: center;
+        padding: 5px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        z-index: 10;
+      }
+            .para {
         margin: 20px;
         color: #140014;
         text-align: center;
         font-size: 200%;
       }
 
+      .header button {
+        color: black;
+        padding: 7px 10px;
+        margin: 8px 0;
+        border: 1px solid black;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 120px;
+      }
+
+      button {
+        width: 10rem;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        background-color: var(--primary-color);
+        border-radius: 1rem;
+        margin: auto;
+        text-align: center;
+        margin-bottom: 1em;
+      }
+
+      .company_name {
+        margin-right: 50%;
+      }
+
+      .header button:hover {
+        background-color: #ddd;
+      }
+      .header button:active {
+        background-color: #000;
+        color: white;
+      }
+
+
+
+      .head {
+        text-align: center;
+        padding-top: 10px;
+        font-size: 200%;
+        font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+        color: #000;
+      }
       body {
-        background-color: #a0659180;
+        background-color: #d4c4deb0;
       }
-      #carouselExampleInterval {
-        margin: 1rem 20rem 1rem 20rem;
+      main {
+        margin-top: 5rem;
       }
-      
     </style>
     <!--Nav Bar-->
     <header>
