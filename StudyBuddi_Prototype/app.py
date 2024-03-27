@@ -10,7 +10,7 @@ def index():
 
 @app.route('/profile')
 def profile():
-    return render_template('profilepage.html')
+    return render_template('profile.html')
 
 @app.route('/match')
 def match():
