@@ -16,7 +16,7 @@ def login():
 @app.route('/profile')
 def profile():
     # Here you can render the profile page or perform any other actions
-    return render_template('profile.html')
+    return render_template('profilepage.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
