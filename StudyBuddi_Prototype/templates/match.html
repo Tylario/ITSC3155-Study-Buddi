@@ -16,7 +16,6 @@
     />
 
     <style>
-
       .members_wrapper {
         display: flex;
         flex-wrap: wrap;
@@ -24,11 +23,11 @@
         width: 100%;
       }
 
-
       .profile_img {
         width: 10rem; /* Fixed width */
         height: 10rem; /* Fixed height */
         object-fit: cover; /* Ensures image covers the area without stretching */
+        border-radius: 1rem;
       }
 
       .contact_group_button {
@@ -80,7 +79,6 @@
       }
 
       .group_container {
-
         width: 100%;
         left: 5%;
         margin-top: 20px;
@@ -96,7 +94,6 @@
         align-items: center;
       }
       .member_container {
-
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -106,6 +103,8 @@
         padding: 0.2rem;
         border-radius: 1rem;
         background-color: white;
+        text-wrap: wrap;
+        max-width: 18rem;
       }
       #groups {
         align-content: center;
@@ -133,7 +132,6 @@
         margin-bottom: 1em;
       }
       .bio-p {
-        max-width: 16rem;
         margin: 0.5rem;
       }
       .company_name {
@@ -182,6 +180,35 @@
         flex-direction: row;
         justify-content: space-evenly;
         margin-top: 8rem;
+      }
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        z-index: 9999; /* Ensure it's above other content */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .expanded_profile {
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .expanded_profile .profile_img {
+        width: 20rem;
+    height: 20rem;
+    object-fit: cover;
+    border-radius: 1rem;
       }
     </style>
   </head>
@@ -232,6 +259,7 @@
     </div>
   </body>
   <script>
+    "use strict";
     const people = [
       {
         name: "Tyler Hudson",
@@ -538,6 +566,10 @@
 
         let emails = groupMembers.map((member) => member.email).join(",");
         groupsContainer.innerHTML += `<div class="group_container"><div class="members_wrapper">${membersHTML}</div><button class="contact_group_button" onclick="window.location.href='mailto:${emails}'">Contact Group</button></div>`;
+        const profileCards = document.querySelectorAll(".member_container");
+        profileCards.forEach((card) =>
+          card.addEventListener("click", showCard)
+        );
       }
     }
 
@@ -545,5 +577,31 @@
     document
       .getElementById("groupSize")
       .addEventListener("change", initializeContent);
+    function showCard(e) {
+      // Get the clicked member container
+      const memberContainer = e.target.closest(".member_container");
+
+      // Create a new element for overlay
+      const overlay = document.createElement("div");
+      overlay.classList.add("overlay");
+
+      // Create HTML content for the expanded profile
+      const expandedProfileHTML = `
+    <div class="expanded_profile">
+      ${memberContainer.innerHTML}
+    </div>
+  `;
+
+      // Set the HTML content to the overlay
+      overlay.innerHTML = expandedProfileHTML;
+
+      // Append the overlay to the body
+      document.body.appendChild(overlay);
+
+      // Add a click event listener to the overlay to close it when clicked
+      overlay.addEventListener("click", function () {
+        overlay.remove();
+      });
+    }
   </script>
 </html>
