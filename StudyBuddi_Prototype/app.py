@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+import uuid
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
@@ -7,14 +8,14 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable modification tra
 db = SQLAlchemy(app)
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(36), primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(50), nullable=False)
 
 # Create the database tables
 with app.app_context():
     db.create_all()
-    sample_user = User(id=0, username='testuser', password='testpassword')
+    sample_user = User(id='00', username='testuser', password='testpassword')
     db.session.add(sample_user)
     # db.session.commit()
 
@@ -52,6 +53,27 @@ def login():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    if request.method == 'POST':
+        # Extract username and password from the form data
+        username = request.form['username']
+        password = request.form['password']
+
+        # Generate a unique user id
+        id = str(uuid.uuid4())
+
+        # Create a new User object with the provided data
+        new_user = User(id=id, username=username, password=password)
+
+        # Add the new user to the database session
+        db.session.add(new_user)
+
+        # Commit the transaction to save the new user to the database
+        db.session.commit()
+
+        # Redirect the user to a success page or render a success message
+        return render_template('profile.html')
+
+    # If the request method is GET, simply render the signup.html template
     return render_template('signup.html')
 
 if __name__ == '__main__':
