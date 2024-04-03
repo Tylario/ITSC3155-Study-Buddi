@@ -14,6 +14,9 @@ class User(db.Model):
 # Create the database tables
 with app.app_context():
     db.create_all()
+    sample_user = User(id=0, username='testuser', password='testpassword')
+    db.session.add(sample_user)
+    # db.session.commit()
 
 @app.route('/')
 def index():
