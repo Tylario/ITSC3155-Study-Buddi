@@ -32,8 +32,25 @@ with app.app_context():
 def index():
     return render_template('index.html')
 
-@app.route('/profile')
+@app.route('/profile', methods=['GET','POST'])
 def profile():
+    if request.method == 'POST':
+        # Extract username and password from the form data
+        class1 = str(request.form['class1'])
+        print(class1)
+        print("this is a test")
+
+
+        # Create a new User object with the provided data
+        new_user = User(username='testprofile', password='password', class1=class1)
+                # Add the new user to the database session
+        db.session.add(new_user)
+
+        # Commit the transaction to save the new user to the database
+        db.session.commit()
+
+        # Redirect the user to a success page or render a success message
+        return render_template('match.html')
     return render_template('profile.html')
 
 @app.route('/match')
@@ -68,10 +85,10 @@ def signup():
         password = request.form['password']
 
         # Generate a unique user id
-        id = str(uuid.uuid4())
+
 
         # Create a new User object with the provided data
-        new_user = User(id=id, username=username, password=password)
+        new_user = User(username=username, password=password)
 
         # Add the new user to the database session
         db.session.add(new_user)
