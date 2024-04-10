@@ -8,13 +8,23 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable modification tra
 db = SQLAlchemy(app)
 
 class User(db.Model):
-    username = db.Column(db.String(50), primary_key=True, unique=True, nullable=False)
+    username = db.Column(db.String(50), unique=True, nullable=False, primary_key=True)
     password = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(50), unique=True, nullable=True)
+    major = db.Column(db.String(50), nullable=True)
+    bio = db.Column(db.Text, nullable=True)
+    studynotes = db.Column(db.Text, nullable=True)
+    class1 = db.Column(db.String(50), nullable=True)
+    class2 = db.Column(db.String(50), nullable=True)
+    class3 = db.Column(db.String(50), nullable=True)
+    class4 = db.Column(db.String(50), nullable=True)
+    class5 = db.Column(db.String(50), nullable=True)
+    # pfp = db.Column(db.LargeBinary(), nullable=True)
 
 # Create the database tables
 with app.app_context():
     db.create_all()
-    sample_user = User(id='00', username='testuser', password='testpassword')
+    sample_user = User(username='testuser', password='testpassword', email = 'testemail', major = 'testmajor', bio = 'testbio', studynotes = 'teststudynotes', class1 = 'testclass1', class2 = 'testclass2', class3 = 'testclass3', class4 = 'testclass4', class5 = 'testclass5')
     db.session.add(sample_user)
     # db.session.commit()
 
