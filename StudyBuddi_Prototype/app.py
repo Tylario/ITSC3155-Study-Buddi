@@ -19,14 +19,14 @@ class User(db.Model):
     class3 = db.Column(db.String(50), nullable=True)
     class4 = db.Column(db.String(50), nullable=True)
     class5 = db.Column(db.String(50), nullable=True)
-    # pfp = db.Column(db.LargeBinary(), nullable=True)
+    #pfp = db.Column(db.LargeBinary, nullable=True)
 
 # Create the database tables
 with app.app_context():
     db.create_all()
     sample_user = User(username='testuser', password='testpassword', email = 'testemail', major = 'testmajor', bio = 'testbio', studynotes = 'teststudynotes', class1 = 'testclass1', class2 = 'testclass2', class3 = 'testclass3', class4 = 'testclass4', class5 = 'testclass5')
     db.session.add(sample_user)
-    # db.session.commit()
+    #db.session.commit()
 
 @app.route('/')
 def index():
