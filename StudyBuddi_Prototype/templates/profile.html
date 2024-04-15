@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>(low fidelity) Study Buddy - Matching</title>
@@ -7,7 +8,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <!-- Bootstrap CSS find way to change color/organiation-->
+    <!-- Bootstrap CSS find way to change color/organization -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
@@ -20,7 +21,7 @@
       body {
         background-color: #a0659180;
       }
-                  .header {
+      .header {
         position: fixed;
         top: 0;
         width: 100%;
@@ -32,13 +33,30 @@
         justify-content: space-around;
         z-index: 10;
       }
-            .para {
-        margin: 20px;
-        color: #140014;
+      .company_name {
+        margin-right: 50%;
+      }
+      .head {
         text-align: center;
+        padding-top: 10px;
         font-size: 200%;
+        font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+        color: #000;
+      }
+      body {
+        background-color: #d4c4deb0;
       }
 
+      .flex-r {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        margin-top: 6rem;
+      }
+      .flex-box {
+        width: 30rem;
+        margin: 2rem;
+      }
       .header button {
         color: black;
         padding: 7px 10px;
@@ -63,355 +81,134 @@
         margin-right: 50%;
       }
 
-      .header button:hover {
+      button:hover {
         background-color: #ddd;
       }
-      .header button:active {
+      button:active {
         background-color: #000;
         color: white;
-      }
-
-
-
-      .head {
-        text-align: center;
-        padding-top: 10px;
-        font-size: 200%;
-        font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-        color: #000;
-      }
-      body {
-        background-color: #d4c4deb0;
-      }
-      main {
-        margin-top: 5rem;
-      }
-            .flex-r {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        margin-top: 8rem;
       }
     </style>
   </head>
   <body>
     <div class="header">
       <h1 class="company_name">StudyBuddi</h1>
-	  <button onclick="location.href='/'">Home</button>
+      <button onclick="location.href='/'">Home</button>
       <button onclick="location.href='profile'">Profile</button>
       <button onclick="location.href='match'">Matches</button>
     </div>
     <main>
       <div class="flex-r">
-        <form>
-          <h1>Create Profile</h1>
-          <div>
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="input-name"
-                placeholder="Name"
-              />
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
-              <input
-                type="email"
-                class="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                placeholder="Enter email"
-              />
-              <small id="emailHelp" class="form-text text-muted"
-                >Any info you enter may be subject to a data leak.</small
-              >
-            </div>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Upload profile picture</span>
-              </div>
-              <div class="custom-file">
+        <form action="/profile" method="post">
+          <div class="flex-r">
+            <div class="flex-box">
+              <h1>Create Profile</h1>
+              <div class="form-group">
+                <label for="name">Name</label>
                 <input
-                  type="file"
-                  class="custom-file-input"
-                  id="inputGroupFile01"
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  name="name"
+                  placeholder="Name"
                 />
-                <label class="custom-file-label" for="inputGroupFile01"
-                  >Choose file</label
+              </div>
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
+                />
+                <small id="emailHelp" class="form-text text-muted"
+                  >Any info you enter may be subject to a data leak.</small
                 >
               </div>
+              <div class="form-group">
+                <label for="bio">Biography</label>
+                <textarea
+                  class="form-control"
+                  id="bio"
+                  name="bio"
+                  placeholder="Looking for someone to study with me in atkins library! I will mainly be working on 1213 stuff if you are interested."
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label for="profile_picture">Upload profile picture</label>
+                <input
+                  type="file"
+                  class="form-control-file"
+                  id="profile_picture"
+                  name="profile_picture"
+                />
+              </div>
             </div>
-          </div>
-          <label for="Bio">Biography</label>
-          <div class="input-group">
-            <textarea
-              class="form-control"
-              aria-label=""
-              placeholder="Looking for someone to study with me in atkins library! I will mainly be working on 1213 stuff if you are interested."
-            ></textarea>
-          </div>
-        </form>
-        <form action="profile" method="post">
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="inputGroupSelect01"
-                >Class 1</label
-              >
+            <div class="flex-box">
+                            <div class="form-group">
+                <label for="class1">Class 1</label>
+                <select class="form-control" id="class1" name="class1">
+                  <option selected>Choose...</option>
+                  <option value="ITSC 1212">ITSC 1212</option>
+                  <option value="ITSC 1213">ITSC 1213</option>
+                  <option value="ITSC 3146">ITSC 3146</option>
+                  <option value="ITSC 3155">ITSC 3155</option>
+                  <option value="ITCS 3160">ITCS 3160</option>
+                  <option value="ITSC 2175">ITSC 2175</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="class2">Class 2</label>
+                <select class="form-control" id="class2" name="class2">
+                  <option selected>Choose...</option>
+                  <option value="ITSC 1212">ITSC 1212</option>
+                  <option value="ITSC 1213">ITSC 1213</option>
+                  <option value="ITSC 3146">ITSC 3146</option>
+                  <option value="ITSC 3155">ITSC 3155</option>
+                  <option value="ITCS 3160">ITCS 3160</option>
+                  <option value="ITSC 2175">ITSC 2175</option>
+                </select>
+              </div>
+                            <div class="form-group">
+                <label for="class3">Class 3</label>
+                <select class="form-control" id="class3" name="class3">
+                  <option selected>Choose...</option>
+                  <option value="ITSC 1212">ITSC 1212</option>
+                  <option value="ITSC 1213">ITSC 1213</option>
+                  <option value="ITSC 3146">ITSC 3146</option>
+                  <option value="ITSC 3155">ITSC 3155</option>
+                  <option value="ITCS 3160">ITCS 3160</option>
+                  <option value="ITSC 2175">ITSC 2175</option>
+                </select>
+              </div>
+                            <div class="form-group">
+                <label for="class4">Class 4</label>
+                <select class="form-control" id="class4" name="class4">
+                  <option selected>Choose...</option>
+                  <option value="ITSC 1212">ITSC 1212</option>
+                  <option value="ITSC 1213">ITSC 1213</option>
+                  <option value="ITSC 3146">ITSC 3146</option>
+                  <option value="ITSC 3155">ITSC 3155</option>
+                  <option value="ITCS 3160">ITCS 3160</option>
+                  <option value="ITSC 2175">ITSC 2175</option>
+                </select>
+              </div>
+                            <div class="form-group">
+                <label for="class5">Class 5</label>
+                <select class="form-control" id="class5" name="class5">
+                  <option selected>Choose...</option>
+                  <option value="ITSC 1212">ITSC 1212</option>
+                  <option value="ITSC 1213">ITSC 1213</option>
+                  <option value="ITSC 3146">ITSC 3146</option>
+                  <option value="ITSC 3155">ITSC 3155</option>
+                  <option value="ITCS 3160">ITCS 3160</option>
+                  <option value="ITSC 2175">ITSC 2175</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
             </div>
-            <select class="custom-select" id="class1">
-              <option selected>Choose...</option>
-              <option value="1">ITSC 1212</option>
-              <option value="2">ITSC 1213</option>
-              <option value="3">ITSC 3146</option>
-              <option value="4">ITSC 3155</option>
-              <option value="5">ITCS 3160</option>
-              <option value="6">ITSC 2175</option>
-            </select>
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="inputGroupSelect01"
-                >Class 2</label
-              >
-            </div>
-            <select class="custom-select" id="inputGroupSelect01">
-              <option selected>Choose...</option>
-              <option value="1">ITSC 1212</option>
-              <option value="2">ITSC 1213</option>
-              <option value="3">ITSC 3146</option>
-              <option value="4">ITSC 3155</option>
-              <option value="5">ITCS 3160</option>
-              <option value="6">ITSC 2175</option>
-            </select>
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="inputGroupSelect01"
-                >Class 3</label
-              >
-            </div>
-            <select class="custom-select" id="inputGroupSelect01">
-              <option selected>Choose...</option>
-              <option value="1">ITSC 1212</option>
-              <option value="2">ITSC 1213</option>
-              <option value="3">ITSC 3146</option>
-              <option value="4">ITSC 3155</option>
-              <option value="5">ITCS 3160</option>
-              <option value="6">ITSC 2175</option>
-            </select>
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="inputGroupSelect01"
-                >Class 4</label
-              >
-            </div>
-            <select class="custom-select" id="inputGroupSelect01">
-              <option selected>Choose...</option>
-              <option value="1">ITSC 1212</option>
-              <option value="2">ITSC 1213</option>
-              <option value="3">ITSC 3146</option>
-              <option value="4">ITSC 3155</option>
-              <option value="5">ITCS 3160</option>
-              <option value="6">ITSC 2175</option>
-            </select>
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="inputGroupSelect01"
-                >Class 5</label
-              >
-            </div>
-            <select class="custom-select" id="inputGroupSelect01">
-              <option selected>Choose...</option>
-              <option value="1">ITSC 1212</option>
-              <option value="2">ITSC 1213</option>
-              <option value="3">ITSC 3146</option>
-              <option value="4">ITSC 3155</option>
-              <option value="5">ITCS 3160</option>
-              <option value="6">ITSC 2175</option>
-            </select>
-          </div>
-          <a
-            href="http://www.educationplanner.org/students/self-assessments/learning-styles-quiz.shtml"
-            >Dont know your study style? Click here</a
-          >
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="inputGroupSelect01"
-                >Study Style</label
-              >
-            </div>
-            <select class="custom-select" id="inputGroupSelect01">
-              <option selected>Choose...</option>
-              <option value="1">Silent</option>
-              <option value="2">Chatty</option>
-              <option value="3">Casual</option>
-              <option value="3">Whiteboard</option>
-            </select>
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="inputGroupSelect01"
-                >Major</label
-              >
-            </div>
-            <select class="custom-select" id="inputGroupSelect01">
-              <option selected>Choose...</option>
-              <option value="1">Computer Science</option>
-              <option value="2">Data Science</option>
-              <option value="3">Computer Informatics</option>
-              <option value="3">Math</option>
-            </select>
-          </div>
-          <label for="">Please select your availability:</label>
-          <div>
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="inlineCheckbox1"
-                value="option1"
-              />
-              <label class="form-check-label" for="inlineCheckbox1"
-                >Sun AM</label
-              >
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="inlineCheckbox2"
-                value="option2"
-              />
-              <label class="form-check-label" for="inlineCheckbox2"
-                >Mon AM</label
-              >
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="inlineCheckbox3"
-                value="option3"
-              />
-              <label class="form-check-label" for="inlineCheckbox3"
-                >Tue AM</label
-              >
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="inlineCheckbox4"
-                value="option4"
-              />
-              <label class="form-check-label" for="inlineCheckbox4"
-                >Wed AM</label
-              >
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="inlineCheckbox5"
-                value="option5"
-              />
-              <label class="form-check-label" for="inlineCheckbox5"
-                >Thu AM</label
-              >
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="inlineCheckbox6"
-                value="option6"
-              />
-              <label class="form-check-label" for="inlineCheckbox6"
-                >Fri AM</label
-              >
-            </div>
-          </div>
-          <div>
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="inlineCheckbox1"
-                value="option1"
-              />
-              <label class="form-check-label" for="inlineCheckbox1"
-                >Sun PM</label
-              >
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="inlineCheckbox2"
-                value="option2"
-              />
-              <label class="form-check-label" for="inlineCheckbox2"
-                >Mon PM</label
-              >
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="inlineCheckbox3"
-                value="option3"
-              />
-              <label class="form-check-label" for="inlineCheckbox3"
-                >Tue PM</label
-              >
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="inlineCheckbox4"
-                value="option4"
-              />
-              <label class="form-check-label" for="inlineCheckbox4"
-                >Wed PM</label
-              >
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="inlineCheckbox5"
-                value="option5"
-              />
-              <label class="form-check-label" for="inlineCheckbox5"
-                >Thu PM</label
-              >
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="inlineCheckbox5"
-                value="option5"
-              />
-              <label class="form-check-label" for="inlineCheckbox5"
-                >Fri PM</label
-              >
-            </div>
-          </div>
-
-          <div class="text-center" style="margin-top: 20px">
-            <button
-              type="button"
-              class="btn btn-light"
-              <!-- onclick="location.href='match'" -->
-            >
-              Submit
-            </button>
           </div>
         </form>
       </div>
