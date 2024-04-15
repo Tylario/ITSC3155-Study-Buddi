@@ -71,7 +71,7 @@ def profile():
             db.session.commit()
         # Update user's information in the database
 
-        return render_template('match.html')
+        return render_template('match.html',user = user)
     
     return render_template('profile.html')
 
@@ -99,7 +99,7 @@ def updateProfile():
             db.session.commit()
         # Update user's information in the database
 
-        return render_template('match.html')
+        return render_template('match.html', user=user)
     return render_template('updateProfile.html', user = user)
 
 @app.route('/match')
