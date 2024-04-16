@@ -283,11 +283,7 @@
                         <img class="profile_img" src="${
                           member.img
                         }" alt="Profile image">
-                        <div class='tags'>${member.class1
-                          .map(
-                            (element) => `<p class='tags_tags'>${element}</p>`
-                          )
-                          .join("")}
+                        <div class='tags'>${member.class1}
                         </div>
                         <p class='bio-p'>${member.bio}</p>
                         <p>Email: ${member.email}</p>
