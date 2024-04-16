@@ -262,14 +262,9 @@
     "use strict";
   
     // Convert server-side data to JSON and parse it in JavaScript
-    const rawData = '{{ allUsers | tojson | safe }}';  // Safely pass the data as a JSON string
-    const people = JSON.parse(rawData).map(user => ({
-      name: user.name,
-      email: user.email,
-      tags: [user.major, user.class1, user.class2, user.class3, user.class4, user.class5].filter(Boolean),
-      img: user.img || 'https://via.placeholder.com/150', // Placeholder image if user.img is undefined
-      biography: user.bio
-    }));
+    const rawData = '{{ allUsers | tojson | safe }}';
+    const people = JSON.parse(rawData);
+
   
     function initializeContent() {
       const groupSize = parseInt(document.getElementById("groupSize").value, 10);

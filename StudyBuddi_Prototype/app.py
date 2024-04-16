@@ -106,9 +106,23 @@ def updateProfile():
 def match():
     if 'user' not in session:
         return redirect(url_for('login'))
+    
+    all_users = User.query.all()
+    users_json = [{
+        'name': user.name,
+        'email': user.email,
+        'major': user.major,
+        'class1': user.class1,
+        'class2': user.class2,
+        'class3': user.class3,
+        'class4': user.class4,
+        'class5': user.class5,
+        'bio': user.bio,
+        'img': user.img  # Assuming you handle image URLs or data properly
+    } for user in all_users]
 
-    all_users = User.query.all()  # Retrieve all users from the database
-    return render_template('match.html', user=session.get('user'), allUsers=all_users)
+    return render_template('match.html', allUsers=users_json)
+
 
 
 @app.route('/login', methods=['GET', 'POST'])
