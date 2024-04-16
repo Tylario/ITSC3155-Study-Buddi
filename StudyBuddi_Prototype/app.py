@@ -45,8 +45,8 @@ def index():
 
 @app.route('/logout', methods=['GET','POST'])
 def logout():
-    session.pop('user', None)
-    return redirect(url_for('login'))
+    session.clear()
+    return redirect(url_for('index'))
 
 
 @app.route('/profile', methods=['GET','POST'])
@@ -62,7 +62,7 @@ def profile():
         bio = request.form.get('bio')
         class1 = request.form.get('class1')
         # Add other form fields as needed
-        user = User.query.filter_by(username=current_user.username).first()
+        user = User.query.filter_by(username=current_user.username).first() # problem
         if user:
             user.name = name
             user.email = email
@@ -136,8 +136,6 @@ def login():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    if 'user' in session:
-        return redirect(url_for('match'))
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -148,7 +146,7 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
         session['user'] = new_user
-        return redirect(url_for('match'))
+        return redirect(url_for('profile'))
     return render_template('signup.html')
 
 
