@@ -75,53 +75,49 @@ def profile():
     
     return render_template('profile.html')
 
-@app.route('/updateProfile', methods=['GET','POST'])
+@app.route('/updateProfile', methods=['GET', 'POST'])
 def updateProfile():
     if 'user' not in session:
         return redirect(url_for('login'))
-    if request.method == 'GET':
-        current_user = session['user']
-        user = User.query.filter_by(username=current_user.username).first()
     if request.method == 'POST':
         current_user = session['user']
-        # Extract form data
-        name = request.form.get('name')
-        email = request.form.get('email')
-        bio = request.form.get('bio')
-        class1 = request.form.get('class1')
-        # Add other form fields as needed
         user = User.query.filter_by(username=current_user.username).first()
         if user:
-            user.name = name
-            user.email = email
-            user.bio = bio
-            user.class1 = class1
+            user.name = request.form.get('name')
+            user.email = request.form.get('email')
+            user.bio = request.form.get('bio')
+            user.class1 = request.form.get('class1')
+            # Update other fields similarly
             db.session.commit()
-        # Update user's information in the database
+        return redirect(url_for('match'))
+    elif request.method == 'GET':
+        current_user = session['user']
+        user = User.query.filter_by(username=current_user.username).first()
+        return render_template('updateProfile.html', user=user)
 
-        return render_template('match.html', user=user)
-    return render_template('updateProfile.html', user = user)
+    return redirect(url_for('login'))
 
 @app.route('/match')
 def match():
     if 'user' not in session:
         return redirect(url_for('login'))
-    
+
+    current_user = session['user']
     all_users = User.query.all()
     users_json = [{
         'name': user.name,
         'email': user.email,
-        'major': user.major or "",  # Provide default empty string if None
+        'major': user.major or "",
         'class1': user.class1 or "",
         'class2': user.class2 or "",
         'class3': user.class3 or "",
         'class4': user.class4 or "",
         'class5': user.class5 or "",
         'bio': user.bio or "",
-        'img': 'https://via.placeholder.com/150'  # Using a default placeholder image for all users
+        'img': 'https://via.placeholder.com/150'
     } for user in all_users]
 
-    return render_template('match.html', allUsers=users_json)
+    return render_template('match.html', allUsers=users_json, user=current_user)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -131,17 +127,11 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-
         user = User.query.filter_by(username=username).first()
-
         if user and user.password == password:
-            # Store the user in session
             session['user'] = user
-            return redirect(url_for('updateProfile',user = user))
-
-        # Render the login page with an error message if login fails
+            return redirect(url_for('match'))
         return render_template('login.html', error='Invalid username or password')
-
     return render_template('login.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -151,25 +141,16 @@ def signup():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-
         existing_user = User.query.filter_by(username=username).first()
-
         if existing_user:
-            # Render the signup page with an error message if the username already exists
             return render_template('signup.html', error='Username already exists')
-
-        # Create a new User object with the provided data
         new_user = User(username=username, password=password)
-        session['user'] = new_user
-        # Add the new user to the database session
         db.session.add(new_user)
         db.session.commit()
-
-        # Store the new user in session
         session['user'] = new_user
-        return render_template('profile.html')
-
+        return redirect(url_for('match'))
     return render_template('signup.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
