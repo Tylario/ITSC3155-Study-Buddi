@@ -118,10 +118,11 @@ def match():
         'class4': user.class4 or "",
         'class5': user.class5 or "",
         'bio': user.bio or "",
-        'img': user.img if user.img else 'https://via.placeholder.com/150'  # Default placeholder image
+        'img': 'https://via.placeholder.com/150'  # Using a default placeholder image for all users
     } for user in all_users]
 
     return render_template('match.html', allUsers=users_json)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
