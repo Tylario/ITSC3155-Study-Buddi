@@ -265,51 +265,75 @@
     const rawData = '{{ allUsers | tojson | safe }}';
     const people = JSON.parse(rawData);
 
-  
     function initializeContent() {
-      const groupSize = parseInt(document.getElementById("groupSize").value, 10);
+      const groupSize = parseInt(
+        document.getElementById("groupSize").value,
+        10
+      );
       const groupsContainer = document.getElementById("groups");
       groupsContainer.innerHTML = ""; // Clear previous groups
-  
+
       for (let i = 0; i < people.length; i += groupSize) {
         const groupMembers = people.slice(i, i + groupSize);
         let membersHTML = groupMembers
           .map(
-            member => `
-                      <div class="member_container">
-                          <h2>${member.name}</h2>
-                          <img class="profile_img" src="${member.img}" alt="Profile image">
-                          <div class='tags'>${member.tags
-                            .map(tag => `<p class='tags_tags'>${tag}</p>`)
-                            .join("")}
-                          </div>
-                          <p class='bio-p'>${member.biography}</p>
-                          <p>Email: ${member.email}</p>
-                      </div>
-                  `
+            (member) => `
+                    <div class="member_container">
+                        <h2>${member.name}</h2>
+                        <img class="profile_img" src="${
+                          member.img
+                        }" alt="Profile image">
+                        <div class='tags'>${member.class1
+                          .map(
+                            (element) => `<p class='tags_tags'>${element}</p>`
+                          )
+                          .join("")}
+                        </div>
+                        <p class='bio-p'>${member.bio}</p>
+                        <p>Email: ${member.email}</p>
+                    </div>
+                `
           )
           .join("");
-  
-        let emails = groupMembers.map(member => member.email).join(",");
+
+        let emails = groupMembers.map((member) => member.email).join(",");
         groupsContainer.innerHTML += `<div class="group_container"><div class="members_wrapper">${membersHTML}</div><button class="contact_group_button" onclick="window.location.href='mailto:${emails}'">Contact Group</button></div>`;
         const profileCards = document.querySelectorAll(".member_container");
-        profileCards.forEach(card => card.addEventListener("click", showCard));
+        profileCards.forEach((card) =>
+          card.addEventListener("click", showCard)
+        );
       }
     }
-  
+
     document.addEventListener("DOMContentLoaded", initializeContent);
-    document.getElementById("groupSize").addEventListener("change", initializeContent);
-  
+    document
+      .getElementById("groupSize")
+      .addEventListener("change", initializeContent);
     function showCard(e) {
+      // Get the clicked member container
       const memberContainer = e.target.closest(".member_container");
+
+      // Create a new element for overlay
       const overlay = document.createElement("div");
       overlay.classList.add("overlay");
-      const expandedProfileHTML = `<div class="expanded_profile">${memberContainer.innerHTML}</div>`;
+
+      // Create HTML content for the expanded profile
+      const expandedProfileHTML = `
+    <div class="expanded_profile">
+      ${memberContainer.innerHTML}
+    </div>
+  `;
+
+      // Set the HTML content to the overlay
       overlay.innerHTML = expandedProfileHTML;
+
+      // Append the overlay to the body
       document.body.appendChild(overlay);
+
+      // Add a click event listener to the overlay to close it when clicked
       overlay.addEventListener("click", function () {
         overlay.remove();
       });
     }
-  </script>  
+  </script>
 </html>
