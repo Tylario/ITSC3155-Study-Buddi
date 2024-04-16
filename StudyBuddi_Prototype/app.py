@@ -106,7 +106,10 @@ def updateProfile():
 def match():
     if 'user' not in session:
         return redirect(url_for('login'))
-    return render_template('match.html')
+
+    all_users = User.query.all()  # Retrieve all users from the database
+    return render_template('match.html', user=session.get('user'), allUsers=all_users)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
