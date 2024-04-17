@@ -108,6 +108,8 @@ def match():
         return redirect(url_for('login'))
 
     current_user = session['user']
+    username = current_user.username
+
     all_users = User.query.all()
     users_json = [{
         'name': user.name,
@@ -122,7 +124,7 @@ def match():
         'img': 'https://via.placeholder.com/150'
     } for user in all_users]
 
-    return render_template('match.html', allUsers=users_json, user=current_user)
+    return render_template('match.html', allUsers=users_json, username=username)
 
 
 @app.route('/login', methods=['GET', 'POST'])

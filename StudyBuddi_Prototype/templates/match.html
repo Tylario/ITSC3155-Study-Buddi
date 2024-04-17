@@ -261,10 +261,13 @@
   <script>
     "use strict";
   
+    let currentUsername = "{{ username }}";
 
     // Convert server-side data to JSON and parse it in JavaScript
     const rawData = '{{ allUsers | tojson | safe }}';
-    const people = JSON.parse(rawData);
+    const allPeople = JSON.parse(rawData);
+    const people = allPeople.filter(person => person.username !== currentUsername);
+
 
     function initializeContent() {
       const groupSize = parseInt(
