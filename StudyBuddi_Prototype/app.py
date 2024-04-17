@@ -46,6 +46,7 @@ def index():
 @app.route('/logout', methods=['GET','POST'])
 def logout():
     session.clear()
+
     return redirect(url_for('index'))
 
 
@@ -61,8 +62,12 @@ def profile():
         email = request.form.get('email')
         bio = request.form.get('bio')
         class1 = request.form.get('class1')
+        #return render_template('profile.html', error=current_user) #prints'<User fffff>'
+        #return render_template('profile.html', error=current_user.username) # gives DetachedInstanceError
+
+
         # Add other form fields as needed
-        user = User.query.filter_by(username=current_user.username).first() # problem
+        user = User.query.filter_by(username=current_user.username).first() #problem gives DetachedInstanceError
         if user:
             user.name = name
             user.email = email
@@ -71,7 +76,7 @@ def profile():
             db.session.commit()
         # Update user's information in the database
 
-        return render_template('match.html',user = user)
+        return redirect(url_for('match'))
     
     return render_template('profile.html')
 
@@ -145,6 +150,7 @@ def signup():
         new_user = User(username=username, password=password)
         db.session.add(new_user)
         db.session.commit()
+        new_user = User(username=username, password=password)
         session['user'] = new_user
         return redirect(url_for('profile'))
     return render_template('signup.html')
