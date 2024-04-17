@@ -261,6 +261,7 @@
   <script>
     "use strict";
   
+
     // Convert server-side data to JSON and parse it in JavaScript
     const rawData = '{{ allUsers | tojson | safe }}';
     const people = JSON.parse(rawData);
@@ -283,11 +284,7 @@
                         <img class="profile_img" src="${
                           member.img
                         }" alt="Profile image">
-                        <div class='tags'>${member.class1
-                          .map(
-                            (element) => `<p class='tags_tags'>${element}</p>`
-                          )
-                          .join("")}
+                        <div class='tags'>${member.class1}
                         </div>
                         <p class='bio-p'>${member.bio}</p>
                         <p>Email: ${member.email}</p>
