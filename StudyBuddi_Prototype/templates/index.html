@@ -103,15 +103,14 @@
       <div class="header">
         <h1 class="company_name">StudyBuddi</h1>
         <button onclick="location.href='match'">Matches</button>
+        <button onclick="location.href='updateProfile'">Profile</button>
         {% if user %}
         <!-- If user is logged in, display sign out button -->
-        <button onclick="location.href='profile'">Profile</button>
         <form action="{{ url_for('logout') }}" method="post">
           <button type="submit" class="btn btn-danger">Sign Out</button>
         </form>
         {% else %}
         <!-- If user is not logged in, display login button -->
-        <button onclick="location.href='updateProfile'">Profile</button>
         <button onclick="location.href='/login'">
           Login
         </button>

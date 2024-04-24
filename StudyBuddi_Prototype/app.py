@@ -62,6 +62,11 @@ def profile():
         email = request.form.get('email')
         bio = request.form.get('bio')
         class1 = request.form.get('class1')
+        class2 = request.form.get('class2')
+        class3 = request.form.get('class3')
+        class4 = request.form.get('class4')
+        class5 = request.form.get('class5')
+
         #return render_template('profile.html', error=current_user) #prints'<User fffff>'
         #return render_template('profile.html', error=current_user.username) # gives DetachedInstanceError
 
@@ -73,6 +78,10 @@ def profile():
             user.email = email
             user.bio = bio
             user.class1 = class1
+            user.class2 = class2
+            user.class3 = class3
+            user.class4 = class4
+            user.class5 = class5
             db.session.commit()
         # Update user's information in the database
 
@@ -92,6 +101,10 @@ def updateProfile():
             user.email = request.form.get('email')
             user.bio = request.form.get('bio')
             user.class1 = request.form.get('class1')
+            user.class2 = request.form.get('class2')
+            user.class3 = request.form.get('class3')
+            user.class4 = request.form.get('class4')
+            user.class5 = request.form.get('class5')
             # Update other fields similarly
             db.session.commit()
         return redirect(url_for('match'))
