@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 import uuid
+import base64
 
 
 app = Flask(__name__)
@@ -13,6 +14,8 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # Limit file size to 16MB
+
 db = SQLAlchemy(app)
 
 
@@ -29,12 +32,13 @@ class User(db.Model):
     class3 = db.Column(db.String(50), nullable=True)
     class4 = db.Column(db.String(50), nullable=True)
     class5 = db.Column(db.String(50), nullable=True)
-    #pfp = db.Column(db.LargeBinary, nullable=True)
+    profile_picture = db.Column(db.Text, nullable=True)  # Store image data as base64 string
+
 
 # Create the database tables
 with app.app_context():
     db.create_all()
-    sample_user = User(username='testuser', password='testpassword',name='name', email = 'testemail', major = 'testmajor', bio = 'testbio', studynotes = 'teststudynotes', class1 = 'testclass1', class2 = 'testclass2', class3 = 'testclass3', class4 = 'testclass4', class5 = 'testclass5')
+    sample_user = User(username='testuser', password='testpassword',name='name', email = 'testemail', major = 'testmajor', bio = 'testbio', studynotes = 'teststudynotes', class1 = 'testclass1', class2 = 'testclass2', class3 = 'testclass3', class4 = 'testclass4', class5 = 'testclass5', profile_picture = '')
     db.session.add(sample_user)
     # db.session.commit()
 
@@ -82,6 +86,15 @@ def profile():
             user.class3 = class3
             user.class4 = class4
             user.class5 = class5
+
+            # Handle profile picture upload
+            profile_picture = request.files['profile_picture']
+            if profile_picture:
+                # Read the file data and convert it to base64 string
+                profile_picture_data = base64.b64encode(profile_picture.read()).decode('utf-8')
+                user.profile_picture = profile_picture_data
+
+
             db.session.commit()
         # Update user's information in the database
 
@@ -91,6 +104,8 @@ def profile():
 
 @app.route('/updateProfile', methods=['GET', 'POST'])
 def updateProfile():
+
+
     if 'user' not in session:
         return redirect(url_for('login'))
     if request.method == 'POST':
@@ -105,6 +120,13 @@ def updateProfile():
             user.class3 = request.form.get('class3')
             user.class4 = request.form.get('class4')
             user.class5 = request.form.get('class5')
+
+            profile_picture = request.files['profile_picture']
+            if profile_picture:
+                # Read the file data and convert it to base64 string
+                profile_picture_data = base64.b64encode(profile_picture.read()).decode('utf-8')
+                user.profile_picture = profile_picture_data
+
             # Update other fields similarly
             db.session.commit()
         return redirect(url_for('match'))
@@ -134,7 +156,7 @@ def match():
         'class4': user.class4 or "",
         'class5': user.class5 or "",
         'bio': user.bio or "",
-        'img': 'https://via.placeholder.com/150'
+        'img': user.profile_picture or 'https://via.placeholder.com/150'  # Use profile picture if available, otherwise placeholder
     } for user in all_users]
 
     return render_template('match.html', allUsers=users_json, username=username)
