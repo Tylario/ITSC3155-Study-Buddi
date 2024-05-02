@@ -156,7 +156,8 @@ def match():
         'class4': user.class4 or "",
         'class5': user.class5 or "",
         'bio': user.bio or "",
-        'img': user.profile_picture or 'https://via.placeholder.com/150'  # Use profile picture if available, otherwise placeholder
+        'img': user.profile_picture or 'https://via.placeholder.com/150',  # Use profile picture if available, otherwise placeholder
+        'username': user.username or ""
     } for user in all_users]
 
     return render_template('match.html', allUsers=users_json, username=username)
