@@ -45,7 +45,7 @@ class User(db.Model):
 # Create the database tables
 with app.app_context():
     db.create_all()
-    sample_user = User(username='testuser', password='testpassword', name='name', email='testemail', major='testmajor', bio='testbio', studynotes='teststudynotes', class1='testclass1', class2='testclass2', class3='testclass3', class4='testclass4', class5='testclass5', profile_picture='', available_monday=True)
+    sample_user = User(username='testuser', password='testpassword', name='name', email='testemail', major='testmajor', bio='testbio', studynotes='teststudynotes', class1='testclass1', class2='testclass2', class3='testclass3', class4='testclass4', class5='testclass5', profile_picture='', available_monday=True, available_tuesday=True, available_wednesday=True, available_thursday=True,  available_friday=True, available_saturday=True, available_sunday=True)
     db.session.add(sample_user)
     # db.session.commit()
 
